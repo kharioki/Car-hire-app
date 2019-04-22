@@ -1,9 +1,35 @@
+# import * from './generated/prisma.graphql'
+
 type Mutation {
-  hi: String
+  createCar(
+    make: String!
+    model: String!
+    year: String
+    mileage: Int
+    type: String!
+    capacity: Int
+    chassisNumber: Int!
+    numberPlate: String!
+    transmission: String!
+    engine: String!
+    imageURL: String!
+    hasFrontAirbags: Boolean
+    hasBackAirbags: Boolean
+    hasRadio: Boolean
+    trunkAvailable: Boolean
+    hasPassengerEntertainment: Boolean
+  ): Car!
 }
 
 type Query {
-  hi: String
+  cars(
+    where: CarWhereInput
+    orderBy: CarOrderByInput
+    skip: Int
+    first: Int
+  ): [Car]!
+
+  car(where: CarWhereUniqueInput!): Car
 }
 
 type User {

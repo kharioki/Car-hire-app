@@ -1,7 +1,9 @@
-const Home = () => {
+import Cars from '../components/Cars';
+
+const Home = props => {
   return (
     <div>
-      <h4>Hey</h4>
+      <Cars page={parseFloat(props.query.page) || 1} />
     </div>
   );
 };

@@ -1,5 +1,9 @@
 # source: https://eu1.prisma.sh/wagura/car-hire/dev
-# timestamp: Fri Apr 19 2019 18:37:48 GMT+0300 (East Africa Time)
+# timestamp: Mon Apr 22 2019 15:54:11 GMT+0300 (East Africa Time)
+
+type AggregateCar {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -10,6 +14,725 @@ type BatchPayload {
   count: Long!
 }
 
+type Car implements Node {
+  id: ID!
+  make: String!
+  model: String!
+  year: String
+  mileage: Int
+  type: String!
+  capacity: Int
+  chassisNumber: Int!
+  numberPlate: String!
+  transmission: String!
+  engine: String!
+  imageURL: String!
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type CarConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CarEdge]!
+  aggregate: AggregateCar!
+}
+
+input CarCreateInput {
+  id: ID
+  make: String!
+  model: String!
+  year: String
+  mileage: Int
+  type: String!
+  capacity: Int
+  chassisNumber: Int!
+  numberPlate: String!
+  transmission: String!
+  engine: String!
+  imageURL: String!
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean
+}
+
+"""An edge in a connection."""
+type CarEdge {
+  """The item at the end of the edge."""
+  node: Car!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CarOrderByInput {
+  id_ASC
+  id_DESC
+  make_ASC
+  make_DESC
+  model_ASC
+  model_DESC
+  year_ASC
+  year_DESC
+  mileage_ASC
+  mileage_DESC
+  type_ASC
+  type_DESC
+  capacity_ASC
+  capacity_DESC
+  chassisNumber_ASC
+  chassisNumber_DESC
+  numberPlate_ASC
+  numberPlate_DESC
+  transmission_ASC
+  transmission_DESC
+  engine_ASC
+  engine_DESC
+  imageURL_ASC
+  imageURL_DESC
+  hasFrontAirbags_ASC
+  hasFrontAirbags_DESC
+  hasBackAirbags_ASC
+  hasBackAirbags_DESC
+  hasRadio_ASC
+  hasRadio_DESC
+  trunkAvailable_ASC
+  trunkAvailable_DESC
+  hasPassengerEntertainment_ASC
+  hasPassengerEntertainment_DESC
+  isVerified_ASC
+  isVerified_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CarPreviousValues {
+  id: ID!
+  make: String!
+  model: String!
+  year: String
+  mileage: Int
+  type: String!
+  capacity: Int
+  chassisNumber: Int!
+  numberPlate: String!
+  transmission: String!
+  engine: String!
+  imageURL: String!
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CarSubscriptionPayload {
+  mutation: MutationType!
+  node: Car
+  updatedFields: [String!]
+  previousValues: CarPreviousValues
+}
+
+input CarSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CarSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CarSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CarSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CarWhereInput
+}
+
+input CarUpdateInput {
+  make: String
+  model: String
+  year: String
+  mileage: Int
+  type: String
+  capacity: Int
+  chassisNumber: Int
+  numberPlate: String
+  transmission: String
+  engine: String
+  imageURL: String
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean
+}
+
+input CarUpdateManyMutationInput {
+  make: String
+  model: String
+  year: String
+  mileage: Int
+  type: String
+  capacity: Int
+  chassisNumber: Int
+  numberPlate: String
+  transmission: String
+  engine: String
+  imageURL: String
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean
+}
+
+input CarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  make: String
+
+  """All values that are not equal to given value."""
+  make_not: String
+
+  """All values that are contained in given list."""
+  make_in: [String!]
+
+  """All values that are not contained in given list."""
+  make_not_in: [String!]
+
+  """All values less than the given value."""
+  make_lt: String
+
+  """All values less than or equal the given value."""
+  make_lte: String
+
+  """All values greater than the given value."""
+  make_gt: String
+
+  """All values greater than or equal the given value."""
+  make_gte: String
+
+  """All values containing the given string."""
+  make_contains: String
+
+  """All values not containing the given string."""
+  make_not_contains: String
+
+  """All values starting with the given string."""
+  make_starts_with: String
+
+  """All values not starting with the given string."""
+  make_not_starts_with: String
+
+  """All values ending with the given string."""
+  make_ends_with: String
+
+  """All values not ending with the given string."""
+  make_not_ends_with: String
+  model: String
+
+  """All values that are not equal to given value."""
+  model_not: String
+
+  """All values that are contained in given list."""
+  model_in: [String!]
+
+  """All values that are not contained in given list."""
+  model_not_in: [String!]
+
+  """All values less than the given value."""
+  model_lt: String
+
+  """All values less than or equal the given value."""
+  model_lte: String
+
+  """All values greater than the given value."""
+  model_gt: String
+
+  """All values greater than or equal the given value."""
+  model_gte: String
+
+  """All values containing the given string."""
+  model_contains: String
+
+  """All values not containing the given string."""
+  model_not_contains: String
+
+  """All values starting with the given string."""
+  model_starts_with: String
+
+  """All values not starting with the given string."""
+  model_not_starts_with: String
+
+  """All values ending with the given string."""
+  model_ends_with: String
+
+  """All values not ending with the given string."""
+  model_not_ends_with: String
+  year: String
+
+  """All values that are not equal to given value."""
+  year_not: String
+
+  """All values that are contained in given list."""
+  year_in: [String!]
+
+  """All values that are not contained in given list."""
+  year_not_in: [String!]
+
+  """All values less than the given value."""
+  year_lt: String
+
+  """All values less than or equal the given value."""
+  year_lte: String
+
+  """All values greater than the given value."""
+  year_gt: String
+
+  """All values greater than or equal the given value."""
+  year_gte: String
+
+  """All values containing the given string."""
+  year_contains: String
+
+  """All values not containing the given string."""
+  year_not_contains: String
+
+  """All values starting with the given string."""
+  year_starts_with: String
+
+  """All values not starting with the given string."""
+  year_not_starts_with: String
+
+  """All values ending with the given string."""
+  year_ends_with: String
+
+  """All values not ending with the given string."""
+  year_not_ends_with: String
+  mileage: Int
+
+  """All values that are not equal to given value."""
+  mileage_not: Int
+
+  """All values that are contained in given list."""
+  mileage_in: [Int!]
+
+  """All values that are not contained in given list."""
+  mileage_not_in: [Int!]
+
+  """All values less than the given value."""
+  mileage_lt: Int
+
+  """All values less than or equal the given value."""
+  mileage_lte: Int
+
+  """All values greater than the given value."""
+  mileage_gt: Int
+
+  """All values greater than or equal the given value."""
+  mileage_gte: Int
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  capacity: Int
+
+  """All values that are not equal to given value."""
+  capacity_not: Int
+
+  """All values that are contained in given list."""
+  capacity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  capacity_not_in: [Int!]
+
+  """All values less than the given value."""
+  capacity_lt: Int
+
+  """All values less than or equal the given value."""
+  capacity_lte: Int
+
+  """All values greater than the given value."""
+  capacity_gt: Int
+
+  """All values greater than or equal the given value."""
+  capacity_gte: Int
+  chassisNumber: Int
+
+  """All values that are not equal to given value."""
+  chassisNumber_not: Int
+
+  """All values that are contained in given list."""
+  chassisNumber_in: [Int!]
+
+  """All values that are not contained in given list."""
+  chassisNumber_not_in: [Int!]
+
+  """All values less than the given value."""
+  chassisNumber_lt: Int
+
+  """All values less than or equal the given value."""
+  chassisNumber_lte: Int
+
+  """All values greater than the given value."""
+  chassisNumber_gt: Int
+
+  """All values greater than or equal the given value."""
+  chassisNumber_gte: Int
+  numberPlate: String
+
+  """All values that are not equal to given value."""
+  numberPlate_not: String
+
+  """All values that are contained in given list."""
+  numberPlate_in: [String!]
+
+  """All values that are not contained in given list."""
+  numberPlate_not_in: [String!]
+
+  """All values less than the given value."""
+  numberPlate_lt: String
+
+  """All values less than or equal the given value."""
+  numberPlate_lte: String
+
+  """All values greater than the given value."""
+  numberPlate_gt: String
+
+  """All values greater than or equal the given value."""
+  numberPlate_gte: String
+
+  """All values containing the given string."""
+  numberPlate_contains: String
+
+  """All values not containing the given string."""
+  numberPlate_not_contains: String
+
+  """All values starting with the given string."""
+  numberPlate_starts_with: String
+
+  """All values not starting with the given string."""
+  numberPlate_not_starts_with: String
+
+  """All values ending with the given string."""
+  numberPlate_ends_with: String
+
+  """All values not ending with the given string."""
+  numberPlate_not_ends_with: String
+  transmission: String
+
+  """All values that are not equal to given value."""
+  transmission_not: String
+
+  """All values that are contained in given list."""
+  transmission_in: [String!]
+
+  """All values that are not contained in given list."""
+  transmission_not_in: [String!]
+
+  """All values less than the given value."""
+  transmission_lt: String
+
+  """All values less than or equal the given value."""
+  transmission_lte: String
+
+  """All values greater than the given value."""
+  transmission_gt: String
+
+  """All values greater than or equal the given value."""
+  transmission_gte: String
+
+  """All values containing the given string."""
+  transmission_contains: String
+
+  """All values not containing the given string."""
+  transmission_not_contains: String
+
+  """All values starting with the given string."""
+  transmission_starts_with: String
+
+  """All values not starting with the given string."""
+  transmission_not_starts_with: String
+
+  """All values ending with the given string."""
+  transmission_ends_with: String
+
+  """All values not ending with the given string."""
+  transmission_not_ends_with: String
+  engine: String
+
+  """All values that are not equal to given value."""
+  engine_not: String
+
+  """All values that are contained in given list."""
+  engine_in: [String!]
+
+  """All values that are not contained in given list."""
+  engine_not_in: [String!]
+
+  """All values less than the given value."""
+  engine_lt: String
+
+  """All values less than or equal the given value."""
+  engine_lte: String
+
+  """All values greater than the given value."""
+  engine_gt: String
+
+  """All values greater than or equal the given value."""
+  engine_gte: String
+
+  """All values containing the given string."""
+  engine_contains: String
+
+  """All values not containing the given string."""
+  engine_not_contains: String
+
+  """All values starting with the given string."""
+  engine_starts_with: String
+
+  """All values not starting with the given string."""
+  engine_not_starts_with: String
+
+  """All values ending with the given string."""
+  engine_ends_with: String
+
+  """All values not ending with the given string."""
+  engine_not_ends_with: String
+  imageURL: String
+
+  """All values that are not equal to given value."""
+  imageURL_not: String
+
+  """All values that are contained in given list."""
+  imageURL_in: [String!]
+
+  """All values that are not contained in given list."""
+  imageURL_not_in: [String!]
+
+  """All values less than the given value."""
+  imageURL_lt: String
+
+  """All values less than or equal the given value."""
+  imageURL_lte: String
+
+  """All values greater than the given value."""
+  imageURL_gt: String
+
+  """All values greater than or equal the given value."""
+  imageURL_gte: String
+
+  """All values containing the given string."""
+  imageURL_contains: String
+
+  """All values not containing the given string."""
+  imageURL_not_contains: String
+
+  """All values starting with the given string."""
+  imageURL_starts_with: String
+
+  """All values not starting with the given string."""
+  imageURL_not_starts_with: String
+
+  """All values ending with the given string."""
+  imageURL_ends_with: String
+
+  """All values not ending with the given string."""
+  imageURL_not_ends_with: String
+  hasFrontAirbags: Boolean
+
+  """All values that are not equal to given value."""
+  hasFrontAirbags_not: Boolean
+  hasBackAirbags: Boolean
+
+  """All values that are not equal to given value."""
+  hasBackAirbags_not: Boolean
+  hasRadio: Boolean
+
+  """All values that are not equal to given value."""
+  hasRadio_not: Boolean
+  trunkAvailable: Boolean
+
+  """All values that are not equal to given value."""
+  trunkAvailable_not: Boolean
+  hasPassengerEntertainment: Boolean
+
+  """All values that are not equal to given value."""
+  hasPassengerEntertainment_not: Boolean
+  isVerified: Boolean
+
+  """All values that are not equal to given value."""
+  isVerified_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+input CarWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -18,11 +741,17 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createCar(data: CarCreateInput!): Car!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateCar(data: CarUpdateInput!, where: CarWhereUniqueInput!): Car
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteCar(where: CarWhereUniqueInput!): Car
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertCar(where: CarWhereUniqueInput!, create: CarCreateInput!, update: CarUpdateInput!): Car!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyCars(data: CarUpdateManyMutationInput!, where: CarWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyCars(where: CarWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -54,8 +783,11 @@ type PageInfo {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  cars(where: CarWhereInput, orderBy: CarOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Car]!
   user(where: UserWhereUniqueInput!): User
+  car(where: CarWhereUniqueInput!): Car
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  carsConnection(where: CarWhereInput, orderBy: CarOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CarConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -66,6 +798,7 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  car(where: CarSubscriptionWhereInput): CarSubscriptionPayload
 }
 
 type User implements Node {

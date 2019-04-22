@@ -3,3 +3,26 @@ type User {
   name: String!
   email: String!
 }
+
+type Car {
+  id: ID! @id
+  make: String!
+  model: String!
+  year: String
+  mileage: Int
+  type: String!
+  capacity: Int
+  chassisNumber: Int!
+  numberPlate: String!
+  transmission: String!
+  engine: String!
+  imageURL: String!
+  hasFrontAirbags: Boolean
+  hasBackAirbags: Boolean
+  hasRadio: Boolean
+  trunkAvailable: Boolean
+  hasPassengerEntertainment: Boolean
+  isVerified: Boolean! @default(value: false)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
