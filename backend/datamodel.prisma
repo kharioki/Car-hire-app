@@ -26,3 +26,12 @@ type Car {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+type CarRate {
+  id: ID! @id
+  ratePerHour: Float
+  ratePerDay: Float
+  ratePerWeek: Float
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

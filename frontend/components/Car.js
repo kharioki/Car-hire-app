@@ -6,7 +6,7 @@ import Rate from './styles/Rate';
 import CarStyles from './styles/CarStyles';
 import PromoTag from './styles/PromoTag';
 
-const Car = ({ car }) => {
+const Car = ({ car, onClick }) => {
   return (
     <CarStyles>
       {car.imageURL && <img src={car.imageURL} alt={car.make} />}
@@ -26,14 +26,7 @@ const Car = ({ car }) => {
       </p>
       <p>{car.year}</p>
       <div className="buttonList">
-        <Link
-          href={{
-            pathname: 'car',
-            query: { id: car.id }
-          }}
-        >
-          <button>View Details 👁</button>
-        </Link>
+        <button onClick={() => onClick(car)}>View Details 👁</button>
 
         {/* <Link
             href={{

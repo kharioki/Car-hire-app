@@ -1,7 +1,9 @@
+import ListCar from '../components/ListCar';
+
 const ListPage = () => {
   return (
     <div>
-      <p>List your car page</p>
+      <ListCar />
     </div>
   );
 };

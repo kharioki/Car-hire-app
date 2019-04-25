@@ -66,7 +66,6 @@ const Header = () => (
       <Nav />
     </div>
     <div className="sub-bar">Search</div>
-    <div>Cart</div>
   </StyledHeader>
 );
 
